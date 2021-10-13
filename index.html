@@ -1,0 +1,26 @@
+<html>
+    <title>Webkit 8.0x test</title>
+    <script>
+
+        async function testwebkit() {
+
+            alert("test webkit exploit");
+            let font = new FontFace("font1", '', {});
+
+            var fontFaceSet = new FontFaceSet([font]);
+
+            font.family = "font2";
+            //do something after the font is loaded
+
+            alert("webkit exploit patched !");
+            
+        }
+
+    </script>
+
+    <body>
+        <button onclick="testwebkit()">test exploit</button>
+
+    </body>
+
+</html>
