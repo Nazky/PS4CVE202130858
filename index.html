@@ -2,39 +2,68 @@
     <title>Webkit 8.xx test</title>
 
     <script>
+        function testwebkit() {
+            alert("THIS SITE IS A TEST FOR THE WEBKIT VULNERABILITY FOR THE PS4\nCLICK OK\nIF YOU DON'T SEE ANY 'API PATCHED' ERROR OR 'MEMORY ERROR' ALERT OR ANY ERROR ALERT THAT'S MEAN IT'S NOT PATCH");
 
-        async function testwebkit() {
+            CheckAPI();
+        }
 
-            alert("THIS SITE IS A TEST FOR THE WEBKIT EXPLOIT FOR THE PS4\n CLICK OK\n IF YOU DON'T SEE ANY 'EXPLOIT PATCHED' ALERT OR 'MEMORY ERROR' ALERT OR ANY ERROR ALERT THAT'S MEAN IT'S NOT PATCH");
-            
+        function CheckAPI() {
+            try {
+                API();
+            }catch(e){
+                var ge = e.message;
+                if (ge == "The string did not match the expected pattern."){
+                    document.getElementById("API").innerHTML = "API not patch !\n";
+                } else if (ge == "Illegal constructor.") {
+                    document.getElementById("API").innerHTML = "API not implement !\n";
+                } else {
+                    document.getElementById("API").innerHTML = e.message;
+                }
+            }
+
+        }
+
+        function API() {
+            let font = new FontFace("font1", 'url()', {});
+
+            var fontFaceSet = new FontFaceSet([font]);
+
+            font.family = "font2";
+
+            document.getElementById("API").innerHTML = "API patched !\n";
+
+            CheckWE();
+
+        }
+
+        function CheckWE() {
             let font = new FontFace("font1", '', {}, ConfirmWork());
 
             var fontFaceSet = new FontFaceSet([font]);
 
             font.family = "font2";
-            //do something after the font is loaded
 
             NotWork();
-            
-            
+
         }
 
         function ConfirmWork() {
             //alert("Webkit Work !");
-            document.getElementById("test").innerHTML = "If you see this it's good !";
-
+            document.getElementById("WE").innerHTML = "Webkit vulnerability work !\n";
+            //go();
         }
 
         function NotWork() {
             //alert("Webkit Patched here !");
-            document.getElementById("test").innerHTML = "If you see this it's NOT good !";
+            document.getElementById("WE").innerHTML = "Webkit vulnerability not work !\n";
         }
-
     </script>
 
     <body>
-        <button onclick="testwebkit()">test exploit</button>
-        <p id="test">test text</p>
-
+        <button onclick="testwebkit()">Check vulnerability</button>
+        <p id="API"></p>
+        <p id="WE"></p>
     </body>
+
 </html>
